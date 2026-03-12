@@ -106,7 +106,7 @@ class _Module12Class3State extends State<Module12Class3> {
                       // width: 100,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        color: Colors.red,
+                        color: Colors.purple,
                       ),
                       alignment: Alignment.center,
                       child: Text('Test'),

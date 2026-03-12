@@ -23,12 +23,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // routes: {
-      //   '/page-1': (context) => Page1(),
-      //   '/page-3': (context) => Page3(),
-      //   '/page-2': (context) => Page2(name: 'Hasnat'),
-      // },
-      // initialRoute: '/page-1',
+      routes: {
+        '/page-1': (context) => Page1(),
+        '/page-3': (context) => Page3(),
+        '/page-2': (context) => Page2(name: 'Hasnat'),
+        '/Module12Class3' : (context) => Module12Class3(),
+      },
+      initialRoute: '/Module12Class3',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.dark,
@@ -51,7 +52,7 @@ class MyApp extends StatelessWidget {
       ),
 
       title: 'Hansat JU',
-      home: Module12Class3(),
+      // home: Module12Class3(),
     );
   }
 }

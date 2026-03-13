@@ -8,7 +8,6 @@ import 'package:module11_class1/module_12/class_1/page_2.dart';
 import 'package:module11_class1/module_12/class_1/page_3.dart';
 import 'package:module11_class1/module_12/class_2/module_12_class_2.dart';
 import 'package:module11_class1/module_12/class_3/animation.dart';
-
 import 'module_11/Class_1/GridView_Builder.dart';
 import 'module_11/Class_1/HomePage_GridView.dart';
 import 'module_11/Class_1/Home_page_listView.dart';
@@ -35,9 +34,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
         primaryColor: Colors.deepPurpleAccent,
         primarySwatch: Colors.deepPurple,
-
         scaffoldBackgroundColor: Colors.blue.shade100,
-
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.blue,
@@ -46,11 +43,10 @@ class MyApp extends StatelessWidget {
         ),
         appBarTheme: AppBarTheme(
           backgroundColor: Colors.blue,
-          foregroundColor: Colors.black,
+          foregroundColor: Colors.white,
           centerTitle: true,
         ),
       ),
-
       title: 'Hansat JU',
       // home: Module12Class3(),
     );

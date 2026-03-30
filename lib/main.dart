@@ -8,6 +8,7 @@ import 'package:module11_class1/module_12/class_1/page_2.dart';
 import 'package:module11_class1/module_12/class_1/page_3.dart';
 import 'package:module11_class1/module_12/class_2/module_12_class_2.dart';
 import 'package:module11_class1/module_12/class_3/animation.dart';
+import 'package:module11_class1/module_13/bottomnav.dart';
 import 'package:module11_class1/module_13/lifecycle.dart';
 import 'package:module11_class1/module_13/statefulWidget.dart';
 import 'module_11/Class_1/GridView_Builder.dart';
@@ -31,8 +32,9 @@ class MyApp extends StatelessWidget {
         '/Module12Class3' : (context) => Module12Class3(),
         '/Module13_Class1' : (context) => Module13_Class1(),
         '/Lifecycle' : (context) => Lifecycle(),
+        '/Bottomnav' : (context) => Module13Class3(),
       },
-      initialRoute: '/Lifecycle',
+      initialRoute: '/Bottomnav',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.dark,

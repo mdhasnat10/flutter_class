@@ -8,6 +8,7 @@ import 'package:module11_class1/module_12/class_1/page_2.dart';
 import 'package:module11_class1/module_12/class_1/page_3.dart';
 import 'package:module11_class1/module_12/class_2/module_12_class_2.dart';
 import 'package:module11_class1/module_12/class_3/animation.dart';
+import 'package:module11_class1/module_13/lifecycle.dart';
 import 'package:module11_class1/module_13/statefulWidget.dart';
 import 'module_11/Class_1/GridView_Builder.dart';
 import 'module_11/Class_1/HomePage_GridView.dart';
@@ -29,8 +30,9 @@ class MyApp extends StatelessWidget {
         '/page-2': (context) => Page2(name: 'Hasnat'),
         '/Module12Class3' : (context) => Module12Class3(),
         '/Module13_Class1' : (context) => Module13_Class1(),
+        '/Lifecycle' : (context) => Lifecycle(),
       },
-      initialRoute: '/Module13_Class1',
+      initialRoute: '/Lifecycle',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.dark,

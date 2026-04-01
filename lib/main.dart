@@ -12,6 +12,7 @@ import 'package:module11_class1/module_13/bottomnav.dart';
 import 'package:module11_class1/module_13/lifecycle.dart';
 import 'package:module11_class1/module_13/statefulWidget.dart';
 import 'package:module11_class1/module_14/sfw_tabbar.dart';
+import 'package:module11_class1/module_14/splash_screen.dart';
 import 'module_11/Class_1/GridView_Builder.dart';
 import 'module_11/Class_1/HomePage_GridView.dart';
 import 'module_11/Class_1/Home_page_listView.dart';
@@ -35,8 +36,9 @@ class MyApp extends StatelessWidget {
         '/Lifecycle' : (context) => Lifecycle(),
         '/Bottomnav' : (context) => Module13Class3(),
         '/Module14_class1' : (context) => Module14_class1(),
+        '/SplashScreen' : (context) => SplashScreen(),
       },
-      initialRoute: '/Module14_class1',
+      initialRoute: '/SplashScreen',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.dark,

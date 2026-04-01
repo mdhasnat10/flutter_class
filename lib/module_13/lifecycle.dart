@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class Lifecycle extends StatefulWidget {
   // final String name;
-  Lifecycle({super.key,}) {
+  Lifecycle({super.key}) {
     print('1 Constructor');
   }
 
@@ -57,9 +57,12 @@ class _LifecycleState extends State<Lifecycle> {
               style: TextStyle(fontSize: 35, color: Colors.black),
             ),
 
-            ElevatedButton(onPressed: () {
-              name = 'tafif';
-            }, child: Text('Changed Name'))
+            ElevatedButton(
+              onPressed: () {
+                name = 'tafif';
+              },
+              child: Text('Changed Name'),
+            ),
           ],
         ),
       ),
@@ -69,10 +72,6 @@ class _LifecycleState extends State<Lifecycle> {
   @override
   void didUpdateWidget(covariant Lifecycle oldWidget) {
     super.didUpdateWidget(oldWidget);
-      
-    
-
-
   }
 
   @override

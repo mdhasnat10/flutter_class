@@ -1,3 +1,5 @@
+import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:module11_class1/module_11/Class_1/HomePage_ListView_Builder.dart';
 import 'package:module11_class1/module_11/Class_2/custom_widget.dart';
@@ -11,6 +13,7 @@ import 'package:module11_class1/module_12/class_3/animation.dart';
 import 'package:module11_class1/module_13/bottomnav.dart';
 import 'package:module11_class1/module_13/lifecycle.dart';
 import 'package:module11_class1/module_13/statefulWidget.dart';
+import 'package:module11_class1/module_14/class%203/cardexample.dart';
 import 'package:module11_class1/module_14/class2/MasonryGridView.dart';
 import 'package:module11_class1/module_14/class2/lottiefile.dart';
 import 'package:module11_class1/module_14/class2/shimmer.dart';
@@ -21,7 +24,11 @@ import 'module_11/Class_1/HomePage_GridView.dart';
 import 'module_11/Class_1/Home_page_listView.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    
+     DevicePreview(
+      
+      enabled: !kReleaseMode, builder: (context) => MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -30,6 +37,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      useInheritedMediaQuery: true,
+      locale: DevicePreview.locale(context),
+      builder: DevicePreview.appBuilder,
       routes: {
         '/page-1': (context) => Page1(),
         '/page-3': (context) => Page3(),
@@ -43,8 +53,9 @@ class MyApp extends StatelessWidget {
         '/Module14Class2' : (context) => Module14Class2(),
         '/Shimmer' : (context) => ShimmerExample(),
         '/LottieFile' : (context) => LottieFile(),
+        '/CardExample' : (context) => CardExample(),
       },
-      initialRoute: '/LottieFile',
+      initialRoute: '/CardExample',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.dark,

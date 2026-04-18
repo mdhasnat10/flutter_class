@@ -21,8 +21,10 @@ class _TaskHomePageState extends State<TaskHomePage> {
   }
 
   Future<void> addTask() async {
-    TaskDatabase.insertTask(Task(title: controller.text, isDone: false));
-    refreshTask();
+    if (controller.text.isEmpty) {
+      TaskDatabase.insertTask(Task(title: controller.text, isDone: false));
+      refreshTask();
+    }
   }
 
   @override
@@ -50,14 +52,12 @@ class _TaskHomePageState extends State<TaskHomePage> {
                 Expanded(
                   child: TextFormField(
                     style: TextStyle(color: Colors.black),
-                  
+
                     controller: controller,
                     decoration: InputDecoration(
-
                       labelStyle: TextStyle(color: Colors.black),
                       hintStyle: TextStyle(color: Colors.black),
                       border: OutlineInputBorder(
-
                         borderSide: BorderSide(color: Colors.black, width: 2.0),
                       ),
                     ),
@@ -74,7 +74,7 @@ class _TaskHomePageState extends State<TaskHomePage> {
           Expanded(
             child: ListView.builder(
               itemCount: tasks.length,
-              
+
               itemBuilder: (context, index) {
                 final task = tasks[index];
                 return Card(

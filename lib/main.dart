@@ -19,16 +19,13 @@ import 'package:module11_class1/module_14/class2/lottiefile.dart';
 import 'package:module11_class1/module_14/class2/shimmer.dart';
 import 'package:module11_class1/module_14/sfw_tabbar.dart';
 import 'package:module11_class1/module_14/splash_screen.dart';
+import 'package:module11_class1/module_16/ui/screen/task_home.dart';
 import 'module_11/Class_1/GridView_Builder.dart';
 import 'module_11/Class_1/HomePage_GridView.dart';
 import 'module_11/Class_1/Home_page_listView.dart';
 
 void main() {
-  runApp(
-    
-     DevicePreview(
-      
-      enabled: !kReleaseMode, builder: (context) => MyApp()));
+  runApp(DevicePreview(enabled: !kReleaseMode, builder: (context) => MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -44,21 +41,22 @@ class MyApp extends StatelessWidget {
         '/page-1': (context) => Page1(),
         '/page-3': (context) => Page3(),
         '/page-2': (context) => Page2(name: 'Hasnat'),
-        '/Module12Class3' : (context) => Module12Class3(),
-        '/Module13_Class1' : (context) => Module13_Class1(),
-        '/Lifecycle' : (context) => Lifecycle(),
-        '/Bottomnav' : (context) => Module13Class3(),
-        '/Module14_class1' : (context) => Module14_class1(),
-        '/SplashScreen' : (context) => SplashScreen(),
-        '/Module14Class2' : (context) => Module14Class2(),
-        '/Shimmer' : (context) => ShimmerExample(),
-        '/LottieFile' : (context) => LottieFile(),
-        '/CardExample' : (context) => CardExample(),
+        '/Module12Class3': (context) => Module12Class3(),
+        '/Module13_Class1': (context) => Module13_Class1(),
+        '/Lifecycle': (context) => Lifecycle(),
+        '/Bottomnav': (context) => Module13Class3(),
+        '/Module14_class1': (context) => Module14_class1(),
+        '/SplashScreen': (context) => SplashScreen(),
+        '/Module14Class2': (context) => Module14Class2(),
+        '/Shimmer': (context) => ShimmerExample(),
+        '/LottieFile': (context) => LottieFile(),
+        '/CardExample': (context) => CardExample(),
+        '/TaskHomePage': (context) => TaskHomePage(),
       },
-      initialRoute: '/CardExample',
+      initialRoute: '/TaskHomePage',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        brightness: Brightness.dark,
+        // brightness: Brightness.dark,
         primaryColor: Colors.deepPurpleAccent,
         primarySwatch: Colors.deepPurple,
         scaffoldBackgroundColor: Colors.blue.shade100,

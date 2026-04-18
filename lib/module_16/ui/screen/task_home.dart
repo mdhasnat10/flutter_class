@@ -1,0 +1,115 @@
+import 'dart:math';
+import 'package:flutter/material.dart';
+import 'package:module11_class1/module_16/db/task_database.dart';
+import 'package:module11_class1/module_16/model/task_model.dart';
+
+class TaskHomePage extends StatefulWidget {
+  const TaskHomePage({super.key});
+
+  @override
+  State<TaskHomePage> createState() => _TaskHomePageState();
+}
+
+class _TaskHomePageState extends State<TaskHomePage> {
+  TextEditingController controller = TextEditingController();
+
+  List<Task> tasks = [];
+
+  Future<void> refreshTask() async {
+    tasks = await TaskDatabase.getTask();
+    setState(() {});
+  }
+
+  Future<void> addTask() async {
+    TaskDatabase.insertTask(Task(title: controller.text, isDone: false));
+    refreshTask();
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    refreshTask();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Task With DB')),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 10,
+              bottom: 10,
+              right: 10,
+              top: 10,
+            ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextFormField(
+                    style: TextStyle(color: Colors.black),
+                  
+                    controller: controller,
+                    decoration: InputDecoration(
+
+                      labelStyle: TextStyle(color: Colors.black),
+                      hintStyle: TextStyle(color: Colors.black),
+                      border: OutlineInputBorder(
+
+                        borderSide: BorderSide(color: Colors.black, width: 2.0),
+                      ),
+                    ),
+                  ),
+                ),
+                IconButton(
+                  onPressed: addTask,
+                  icon: Icon(Icons.add, color: Colors.black),
+                ),
+              ],
+            ),
+          ),
+
+          Expanded(
+            child: ListView.builder(
+              itemCount: tasks.length,
+              
+              itemBuilder: (context, index) {
+                final task = tasks[index];
+                return Card(
+                  child: ListTile(
+                    leading: Checkbox(
+                      activeColor: Colors.blue,
+                      checkColor: Colors.white,
+                      side: BorderSide(color: Colors.black),
+                      value: false,
+                      onChanged: (_) {},
+                    ),
+                    title: Text(
+                      task.title,
+                      style: TextStyle(color: Colors.black, fontSize: 18),
+                    ),
+                    trailing: Row(
+                      mainAxisSize: .min,
+                      children: [
+                        IconButton(
+                          onPressed: () {},
+                          icon: Icon(Icons.edit, color: Colors.black),
+                        ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: Icon(Icons.delete, color: Colors.red),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

@@ -145,7 +145,6 @@ class CardExample extends StatelessWidget {
               ),
 
               Stepper(
-
                 currentStep: 0,
                 connectorColor: WidgetStatePropertyAll(Colors.blue),
                 steps: [

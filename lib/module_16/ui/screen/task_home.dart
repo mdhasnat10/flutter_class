@@ -21,11 +21,32 @@ class _TaskHomePageState extends State<TaskHomePage> {
   }
 
   Future<void> addTask() async {
-    if (controller.text.isEmpty) {
+    if (controller.text.isNotEmpty) {
       TaskDatabase.insertTask(Task(title: controller.text, isDone: false));
+      controller.clear();
       refreshTask();
     }
   }
+
+  Future<void> deleteTask(int id) async {
+    await TaskDatabase.deleteTask(id);
+    refreshTask();
+  }
+
+  Future<void> toggleTaskStatus(Task task) async {
+    await TaskDatabase.updateTask(
+      Task(id: task.id, title: task.title, isDone: !task.isDone),
+    );
+    refreshTask();
+  }
+
+  // Future<void> editDialog(Task task) async {
+  //   TextEditingController controller = TextEditingController();
+  //   await TaskDatabase.updateTask(
+  //     Task(id: task.id, title: task.title, isDone: !task.isDone),
+  //   );
+  //   refreshTask();
+  // }
 
   @override
   void initState() {
@@ -77,31 +98,57 @@ class _TaskHomePageState extends State<TaskHomePage> {
 
               itemBuilder: (context, index) {
                 final task = tasks[index];
-                return Card(
-                  child: ListTile(
-                    leading: Checkbox(
-                      activeColor: Colors.blue,
-                      checkColor: Colors.white,
-                      side: BorderSide(color: Colors.black),
-                      value: false,
-                      onChanged: (_) {},
-                    ),
-                    title: Text(
-                      task.title,
-                      style: TextStyle(color: Colors.black, fontSize: 18),
-                    ),
-                    trailing: Row(
-                      mainAxisSize: .min,
-                      children: [
-                        IconButton(
-                          onPressed: () {},
-                          icon: Icon(Icons.edit, color: Colors.black),
+                return Dismissible(
+                  key: Key(task.id.toString()),
+                  direction: DismissDirection.endToStart,
+                  background: Container(
+                    alignment: Alignment.centerRight,
+                    color: Colors.red,
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: Icon(Icons.delete, color: Colors.white),
+                  ),
+                  onDismissed: (_) {
+                    deleteTask(task.id!);
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(SnackBar(content: Text('Task deleted')));
+                  },
+                  child: Card(
+                    child: ListTile(
+                      leading: Checkbox(
+                        activeColor: Colors.blue,
+                        checkColor: Colors.white,
+                        side: BorderSide(color: Colors.black),
+                        value: task.isDone,
+                        onChanged: (_) {
+                          toggleTaskStatus(task);
+                        },
+                      ),
+                      title: Text(
+                        task.title,
+                        style: TextStyle(
+                          color: task.isDone ? Colors.grey : Colors.black,
+                          fontSize: 18,
+                          decoration: task.isDone
+                              ? TextDecoration.lineThrough
+                              : TextDecoration.none,
                         ),
-                        IconButton(
-                          onPressed: () {},
-                          icon: Icon(Icons.delete, color: Colors.red),
-                        ),
-                      ],
+                      ),
+                      trailing: Row(
+                        mainAxisSize: .min,
+                        children: [
+                          IconButton(
+                            onPressed: () {},
+                            icon: Icon(Icons.edit, color: Colors.black),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              deleteTask(task.id!);
+                            },
+                            icon: Icon(Icons.delete, color: Colors.red),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 );

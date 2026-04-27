@@ -12,8 +12,10 @@ class TaskHomePage extends StatefulWidget {
 
 class _TaskHomePageState extends State<TaskHomePage> {
   TextEditingController controller = TextEditingController();
+  TextEditingController taskUpdatecontroller = TextEditingController();
 
   List<Task> tasks = [];
+  Task? lastDeletedTask;
 
   Future<void> refreshTask() async {
     tasks = await TaskDatabase.getTask();
@@ -40,13 +42,22 @@ class _TaskHomePageState extends State<TaskHomePage> {
     refreshTask();
   }
 
-  // Future<void> editDialog(Task task) async {
-  //   TextEditingController controller = TextEditingController();
-  //   await TaskDatabase.updateTask(
-  //     Task(id: task.id, title: task.title, isDone: !task.isDone),
-  //   );
-  //   refreshTask();
-  // }
+  Future<void> taskUpdate(Task task) async {
+    await TaskDatabase.updateTask(
+      Task(id: task.id, title: task.title, isDone: !task.isDone),
+    );
+    // controller.clear();
+    // addTask();
+    // refreshTask();
+  }
+
+  Future<void> undoDelete() async {
+    if (lastDeletedTask != null) {
+      await TaskDatabase.insertTask(lastDeletedTask!);
+      lastDeletedTask = null; // Clear after successful undo
+      await refreshTask();
+    }
+  }
 
   @override
   void initState() {
@@ -109,9 +120,17 @@ class _TaskHomePageState extends State<TaskHomePage> {
                   ),
                   onDismissed: (_) {
                     deleteTask(task.id!);
-                    ScaffoldMessenger.of(
-                      context,
-                    ).showSnackBar(SnackBar(content: Text('Task deleted')));
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Task deleted'),
+                        action: SnackBarAction(
+                          label: 'Undo',
+                          onPressed: () async {
+                            await undoDelete();
+                          },
+                        ),
+                      ),
+                    );
                   },
                   child: Card(
                     child: ListTile(
@@ -122,6 +141,7 @@ class _TaskHomePageState extends State<TaskHomePage> {
                         value: task.isDone,
                         onChanged: (_) {
                           toggleTaskStatus(task);
+                          // deleteTask(index);
                         },
                       ),
                       title: Text(
@@ -138,7 +158,40 @@ class _TaskHomePageState extends State<TaskHomePage> {
                         mainAxisSize: .min,
                         children: [
                           IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              taskUpdatecontroller.text = task.title;
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    title: Text('Update Task'),
+                                    content: TextFormField(
+                                      controller: taskUpdatecontroller,
+                                      decoration: InputDecoration(
+                                        border: OutlineInputBorder(),
+                                      ),
+                                    ),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text('Cancel'),
+                                      ),
+                                      
+                                      TextButton(
+                                        onPressed: () {
+                                          taskUpdate(task);
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text('Update'),
+                                      ),
+
+                                    ],
+                                  );
+                                },
+                              );
+                            },
                             icon: Icon(Icons.edit, color: Colors.black),
                           ),
                           IconButton(
